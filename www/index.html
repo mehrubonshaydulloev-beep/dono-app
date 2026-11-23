@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="tg"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b6b45">
+<title>Dono Energy</title>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
+<style>
+:root{--g:#0a7a3f;--g2:#06532c;--bg:#f1f6f3;--card:#fff;--ink:#12302a;--mut:#5f766e;--line:#dbe7e0;--soft:#e4f4ea;--err:#b3261e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a15;--card:#15251e;--ink:#e6f2ec;--mut:#9bb3a9;--line:#27402f;--soft:#1c3a2a}}
+:root[data-theme="dark"]{--bg:#0e1a15;--card:#15251e;--ink:#e6f2ec;--mut:#9bb3a9;--line:#27402f;--soft:#1c3a2a}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 "Segoe UI",Roboto,system-ui,Arial,sans-serif}
+header{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;padding:16px 14px}
+.wrap{max-width:980px;margin:auto}
+.top{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{font-size:40px;filter:drop-shadow(0 0 6px #d6ff3a)}
+h1{margin:0;font-size:30px;line-height:1.1}
+.sub{font-weight:600;font-size:15px}
+.tag{background:#ffffff22;border-radius:20px;padding:6px 12px;font-size:14px;font-weight:600}
+nav{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;max-width:980px;margin:auto;align-items:center}
+nav a{white-space:nowrap;text-decoration:none;color:var(--ink);padding:9px 14px;border-radius:10px;font-weight:600;font-size:15px}
+nav a.on{background:var(--g);color:#fff}
+nav .sec{margin-left:auto;background:var(--g2);color:#fff;padding:9px 14px;border-radius:10px;font-weight:700;font-size:14px;white-space:nowrap}
+main{max-width:980px;margin:auto;padding:4px 14px 20px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:720px){main{grid-template-columns:1fr}h1{font-size:25px}}
+.card{background:var(--card);border-radius:16px;padding:16px;box-shadow:0 4px 16px #0a3a2018;border:1px solid var(--line)}
+.card h2{margin:0 0 12px;font-size:20px;display:flex;align-items:center;gap:10px}
+.n{background:var(--g);color:#fff;width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+.f{display:grid;grid-template-columns:120px 1fr;gap:8px 10px;align-items:center;margin-bottom:10px}
+.f label{font-size:14px;color:var(--mut);font-weight:600}
+input{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+input:focus,button:focus-visible{outline:2px solid var(--g);outline-offset:1px}
+button{font:inherit;font-weight:700;border:0;border-radius:11px;padding:12px 14px;background:linear-gradient(var(--g),var(--g2));color:#fff;cursor:pointer;width:100%}
+button.o{background:var(--card);color:var(--g);border:1.5px solid var(--g)}
+button.s{width:auto;padding:5px 10px;font-size:13px;background:var(--card);color:var(--g);border:1px solid var(--g)}
+button:disabled{opacity:.5}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.photo{border-radius:12px;background:#222 center/cover;min-height:150px;width:100%;position:relative;overflow:hidden}
+.photo video,.photo img{width:100%;height:100%;max-height:230px;object-fit:cover;display:block}
+.ph{display:grid;grid-template-columns:1.5fr 1fr;gap:10px}
+@media(max-width:420px){.ph{grid-template-columns:1fr}.f{grid-template-columns:1fr}}
+.read{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.read b{font-size:32px;color:var(--g);letter-spacing:1px}
+.msg{margin-top:10px;padding:9px 12px;border-radius:10px;background:var(--soft);color:var(--g2);font-size:14px}
+.msg.e{background:#fde8e6;color:var(--err)}
+.msg[hidden]{display:none}
+.line{display:flex;justify-content:space-between;align-items:center;padding:9px 0;font-size:17px;border-bottom:1px solid var(--line)}
+.line b{font-size:18px}
+.pill{background:var(--soft);color:var(--g2);padding:6px 16px;border-radius:20px}
+.big{background:linear-gradient(var(--g),var(--g2));color:#fff!important;padding:8px 16px;border-radius:12px;font-size:22px!important}
+.rc{background:#fbfbf7;color:#222;border:1px dashed #aaa;border-radius:6px;padding:12px;font-size:14px}
+.rc h3{margin:0 0 6px;text-align:center;color:var(--g)}
+.rc .r{display:flex;justify-content:space-between;padding:2px 0;gap:8px}
+.rc .tot{background:var(--g2);color:#fff;text-align:center;font-weight:800;padding:6px;margin-top:6px;font-size:17px}
+.rcw{display:grid;grid-template-columns:1.4fr 1fr;gap:10px}
+@media(max-width:520px){.rcw{grid-template-columns:1fr}}
+.rcw .btns{display:flex;flex-direction:column;gap:8px;justify-content:center}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--soft);text-align:left;padding:8px 6px}
+td{padding:8px 6px;border-bottom:1px solid var(--line)}
+.wide{grid-column:1/-1}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip{border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer;background:var(--card);color:var(--ink);width:auto}
+.chip.on{border-color:var(--g);background:var(--soft);color:var(--g2)}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.pay{grid-template-columns:1fr}}
+.amt{background:linear-gradient(var(--g),var(--g2));color:#fff;border-radius:12px;padding:12px}
+.amt b{font-size:26px;display:block}
+.ok{background:var(--soft);color:var(--g2);padding:10px;border-radius:10px;font-weight:600}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg)}
+main>section{display:none}main>section.show{display:block}
+main[data-pg]>section{grid-column:1/-1}
+main[data-pg="asosi"]>section:not(#c3){grid-column:auto}
+@media(max-width:720px){main[data-pg="asosi"]>section{grid-column:1/-1}}
+footer{background:var(--soft);padding:14px;text-align:center;font-weight:700;color:var(--g2)}
+.small{font-size:12px;color:var(--mut);margin:6px 0 0}
+@media print{body *{visibility:hidden}#rcbox,#rcbox *{visibility:visible}#rcbox{position:absolute;left:0;top:0;width:100%}}
+</style></head><body>
+<header><div class="wrap top">
+<div class="brand"><div class="logo">⚡</div><div><h1>Dono Energy</h1><div class="sub">Ҳисобкунии автоматии нерӯи барқ</div></div></div>
+<div class="tag">🇹🇯 Тоҷикистон &nbsp;|&nbsp; 👤 Истифодабаранда</div>
+</div></header>
+<nav id="nav">
+<a href="#asosi" class="on">🏠 Асосӣ</a><a href="#tarix">🕘 Таърих</a><a href="#chek">🧾 Чекҳо</a><a href="#pardoxt">💳 Пардохт</a>
+<span class="sec">🛡 Маълумот дар дастгоҳ</span></nav>
+<main id="top">
+
+<section class="card" data-p="asosi"><h2><span class="n">1</span>Маълумоти муштарӣ</h2>
+<div class="f"><label>👤 Ному насаб:</label><input id="owner" placeholder="Ному насаб"></div>
+<div class="f"><label>⚡ Рақами литсавой:</label><div style="display:flex;gap:6px"><input id="account" inputmode="numeric" placeholder="Рақами литсавой"><button id="fnd" style="width:auto">🔍 Ёфтан</button></div></div>
+<div class="f"><label>🏠 Суроға:</label><input id="address" placeholder="Суроға"></div>
+<div class="f"><label>Тариф (сомонӣ/кВт·соат):</label><input id="tariff" type="number" step="0.01" min="0.01" value="0.42"></div>
+<div id="bi" class="msg" hidden style="margin:0 0 10px"></div><button id="saveP">💾 Сабт кардан</button><div id="pm" class="msg" hidden></div></section>
+
+<section class="card" data-p="asosi"><h2><span class="n">2</span>Акс аз ҳисобкунак</h2>
+<div class="ph"><div class="photo" id="ph"><video id="vid" autoplay playsinline hidden></video><img id="img" alt="Акси ҳисобкунак" hidden></div>
+<div class="read"><div id="rl" style="color:var(--mut)">Рақам ҳоло хонда нашудааст</div><b id="rv"></b>
+<button class="o" id="pick">🔄 Интихоби нав</button></div></div>
+<div class="row2"><button id="cam">📷 Камера</button><button class="o" id="gal">🖼 Аз галерея</button></div>
+<div class="row2" id="camA" hidden><button id="snap">Гирифтани акс</button><button class="o" id="cls">Пӯшидани камера</button></div>
+<input id="file" type="file" accept="image/*" hidden>
+<canvas id="cv" hidden></canvas>
+<div class="row2"><button class="o" id="ocrB" style="grid-column:1/-1">🔍 Хондани рақам аз акс (OCR)</button></div>
+<div id="om" class="msg" hidden></div></section>
+
+<section class="card" id="c3" data-p="asosi"><h2><span class="n">3</span>Ҳисоб ва натиҷа</h2>
+<div class="line"><span>Нишондиҳандаи пешина:</span><input id="prev" inputmode="numeric" maxlength="5" placeholder="5 рақам" style="width:110px;text-align:right;font-weight:800"></div>
+<div class="line"><span>Нишондиҳандаи нав:</span><input id="cur" inputmode="numeric" maxlength="5" placeholder="5 рақам" style="width:110px;text-align:right;font-weight:800"></div>
+<div class="line"><span>Масрафи барқ:</span><b class="pill" id="cons">— кВт·соат</b></div>
+<div class="line"><span>Тариф:</span><b id="tf">0.42 сомонӣ</b></div>
+<div class="line" style="border:0"><span>Маблағи ҳисобшуда:</span><b class="big" id="amt">0.00 сомонӣ</b></div>
+<button id="calc">🧮 Тасдиқ ва нигоҳ доштан</button><div id="cm" class="msg" hidden></div></section>
+
+<section class="card" id="chek" data-p="chek"><h2><span class="n">4</span>Чеки электронӣ</h2>
+<div class="rcw"><div id="rcbox"><div class="rc" id="rc" style="text-align:center;color:#777">Чек ҳоло сохта нашудааст.</div></div>
+<div class="btns"><button id="prt">🖨 Чоп кардан</button><button class="o" id="pdf">⬇ Сабт ба PDF</button><button class="o" id="shr">🔗 Илтиҳод кардан</button></div></div></section>
+
+<section class="card" id="hist" data-p="tarix"><h2><span class="n">5</span>Таърихи ҳисобҳо</h2>
+<div style="overflow-x:auto"><table><thead><tr><th>№</th><th>Сана</th><th>Масраф</th><th>Маблағ</th><th></th></tr></thead><tbody id="hb"></tbody></table></div>
+<div class="row2"><button class="o" id="more">🕘 Бештар...</button></div></section>
+
+<section class="card" id="pay" data-p="pardoxt"><h2><span class="n">6</span>Пардохти барқ</h2>
+<div class="pay"><div class="amt">Маблағи пардохт:<b id="pa">0.00 сомонӣ</b></div><button id="payB">💳 Пардохт кардан</button></div>
+<div style="margin-top:8px;font-weight:600">Бонкро интихоб кунед:</div>
+<div class="chips" id="chips"></div>
+<div id="bk" class="ok" hidden></div><div id="ps" class="ok" hidden></div>
+<p class="small">Диққат: барнома пардохти воқеиро намегирад, танҳо пардохтро дар таърих қайд мекунад.</p></section>
+
+</main>
+<footer>🍃 Dono Energy – барои зиндагии беҳтар &nbsp;·&nbsp; © 2026 Dono Energy | Тоҷикистон</footer>
+<script>
+"use strict";
+const KEY="dono_energy_v5",$=i=>document.getElementById(i);
+let d={profile:{owner:"",account:"",address:"",tariff:0.42},last:"",history:[],custom:{},bal:{}},view=null,method="",stream=null,photo="",all=false,mem=null;
+const METHODS=["Amonatbonk","Eskhata Bank","Orienbank","Spitamen Bank","Alif","Dushanbe City Bank"];
+let API_URL="https://dono-serve.onrender.com";
+const NETS=["Шаҳри Душанбе","Вилояти Суғд","Вилояти Хатлон","ВМКБ (Бадахшон)","Ноҳияҳои тобеи ҷумҳурӣ"];
+const DB={"1001234":{name:"Саидов Ҳомид",addr:"ш. Душанбе, кӯчаи Рӯдакӣ 25",net:0,r:"24200",bal:70.14},"2005678":{name:"Раҳимова Нигина",addr:"ш. Хуҷанд, кӯчаи Исмоили Сомонӣ 8",net:1,r:"18452",bal:0},"3009911":{name:"Назаров Фирӯз",addr:"ш. Бохтар, кӯчаи Мирзо Турсунзода 14",net:2,r:"09120",bal:-12.5}};
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s){d={...d,...s,profile:{...d.profile,...(s.profile||{})},history:Array.isArray(s.history)?s.history:[]};}}catch(e){if(mem)d=mem}}
+function save(){mem=d;try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}return true}
+function msg(id,t,e){const x=$(id);x.textContent=t;x.hidden=false;x.classList.toggle("e",!!e)}
+const five=v=>/^\d{5}$/.test(v),m2=n=>Number(n).toFixed(2);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const dt=(iso,t)=>{const x=new Date(iso),p=n=>String(n).padStart(2,"0");return p(x.getDate())+"."+p(x.getMonth()+1)+"."+x.getFullYear()+(t?" "+p(x.getHours())+":"+p(x.getMinutes()):"")};
+function tariff(){const t=Number($("tariff").value);return Number.isFinite(t)&&t>0?t:0}
+function preview(){
+ const p=$("prev").value.trim(),c=$("cur").value.trim(),t=tariff();
+ $("tf").textContent=m2(t)+" сомонӣ";
+ if(five(p)&&five(c)&&+c>=+p){const k=+c-+p;$("cons").textContent=k+" кВт·соат";$("amt").textContent=m2(k*t)+" сомонӣ"}
+ else{$("cons").textContent="— кВт·соат";$("amt").textContent="0.00 сомонӣ"}
+}
+function receipt(r){
+ view=r?r.id:null;
+ $("rc").style.cssText="";
+ if(!r){$("rc").style.cssText="text-align:center;color:#777";$("rc").textContent="Чек ҳоло сохта нашудааст.";payUI();return}
+ $("rc").innerHTML=`<h3>⚡ Dono Energy<br><small>ЧЕКИ ҲИСОБӢ</small></h3>
+ <div class="r"><span>Сана:</span><b>${dt(r.date,1)}</b></div>
+ <div class="r"><span>Соҳибхона:</span><b>${esc(r.owner||"—")}</b></div>
+ <div class="r"><span>Суроға:</span><b>${esc(r.address||"—")}</b></div>
+ <div class="r"><span>Рақами ҳисоб:</span><b>${esc(r.account||"—")}</b></div><hr>
+ <div class="r"><span>Пешина:</span><b>${r.prev}</b></div><div class="r"><span>Нав:</span><b>${r.cur}</b></div>
+ <div class="r"><span>Масраф:</span><b>${r.cons} кВт·соат</b></div><div class="r"><span>Тариф:</span><b>${m2(r.tariff)} сомонӣ</b></div>
+ <div class="tot">Маблағ: ${m2(r.amount)} сомонӣ</div>
+ <div class="r" style="margin-top:6px"><span>Ҳолат:</span><b>${r.paid?"Пардохт шуд ("+esc(r.method)+")":"Пардохт нашудааст"}</b></div>
+ <p style="text-align:center;margin:8px 0 0;color:#777;font-size:12px">Чеки ҳисобӣ, на ҳуҷҷати расмии ширкати барқ</p>`;
+ payUI();
+}
+function cur(){return d.history.find(r=>r.id===view)}
+function payUI(){
+ const r=cur();$("pa").textContent=r?m2(r.amount)+" сомонӣ":"0.00 сомонӣ";
+ $("payB").disabled=!r||r.paid||!method;
+ $("chips").innerHTML=METHODS.map(m=>`<button class="chip${m===method?" on":""}" data-m="${m}">${m}</button>`).join("");
+ $("chips").querySelectorAll("button").forEach(b=>b.onclick=()=>{method=b.dataset.m;payUI()});
+ const s=$("ps");
+ if(r&&r.paid){s.hidden=false;s.textContent="✅ Пардохт қайд шуд ("+r.method+", "+dt(r.paidAt,1)+")"}else s.hidden=true;
+}
+function hist(){
+ const rows=all?d.history:d.history.slice(0,3);
+ $("hb").innerHTML=rows.length?rows.map((r,i)=>`<tr><td>${d.history.length-d.history.indexOf(r)}</td><td>${dt(r.date)}</td><td>${r.cons} кВт·соат</td><td>${m2(r.amount)} сомонӣ${r.paid?" ✅":""}</td><td><button class="s" data-id="${r.id}">Дидани чек</button></td></tr>`).join(""):`<tr><td colspan="5" style="color:var(--mut)">Ҳоло сабт нест.</td></tr>`;
+ $("hb").querySelectorAll("button").forEach(b=>b.onclick=()=>{receipt(d.history.find(r=>String(r.id)===b.dataset.id));nav("chek")});
+ $("more").hidden=d.history.length<=3;$("more").textContent=all?"Камтар":"🕘 Бештар...";
+}
+function initUI(){
+ const p=d.profile;$("owner").value=p.owner;$("account").value=p.account;$("address").value=p.address;$("tariff").value=p.tariff;
+ $("prev").value=d.last;$("prev").disabled=!!d.history.length;
+ hist();receipt(d.history[0]||null);preview();bi();
+}
+$("saveP").onclick=()=>{
+ if(!tariff())return msg("pm","Тарифро дуруст ворид кунед.",1);
+ d.profile={owner:$("owner").value.trim(),account:$("account").value.trim(),address:$("address").value.trim(),tariff:tariff()};
+ save();msg("pm","Маълумот сабт шуд.");preview();
+};
+$("tariff").oninput=preview;$("prev").oninput=preview;$("cur").oninput=()=>{$("cur").value=$("cur").value.replace(/\D/g,"");preview()};
+$("calc").onclick=()=>{
+ const p=$("prev").value.trim(),c=$("cur").value.trim(),t=tariff();
+ if(!five(p))return msg("cm","Нишондоди пешина маҳз 5 рақам бошад.",1);
+ if(!five(c))return msg("cm","Нишондоди нав маҳз 5 рақам бошад.",1);
+ if(+c<+p)return msg("cm","Рақами нав аз пешина кам аст. Рақамро санҷед.",1);
+ if(!t)return msg("cm","Тарифро дуруст ворид кунед.",1);
+ const k=+c-+p,r={id:Date.now(),date:new Date().toISOString(),owner:$("owner").value.trim(),account:$("account").value.trim(),address:$("address").value.trim(),prev:p,cur:c,cons:k,tariff:t,amount:k*t,paid:false};
+ d.profile={owner:r.owner,account:r.account,address:r.address,tariff:t};
+ d.history.unshift(r);d.last=c;if(r.account)d.bal[r.account]=balOf(r.account)+r.amount;save();bi();
+ $("prev").value=c;$("prev").disabled=true;$("cur").value="";$("rv").textContent="";$("rl").textContent="Рақам ҳоло хонда нашудааст";
+ hist();receipt(r);preview();nav("chek");
+};
+// camera / photo
+function stop(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}$("vid").hidden=true;$("camA").hidden=true;$("vid").srcObject=null;if(photo)$("img").hidden=false}
+function setPhoto(u){photo=u;$("img").src=u;$("img").hidden=false;$("rv").textContent="";$("rl").textContent="Акс омода аст"}
+$("cam").onclick=async()=>{
+ if(!navigator.mediaDevices?.getUserMedia)return msg("om","Камера дастрас нест. Аз галерея интихоб кунед.",1);
+ try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});
+  $("vid").srcObject=stream;$("vid").hidden=false;$("img").hidden=true;$("camA").hidden=false}
+ catch(e){msg("om","Камера кушода нашуд. Иҷозатро санҷед ё галереяро истифода баред.",1)}
+};
+$("cls").onclick=stop;
+$("snap").onclick=()=>{const v=$("vid");if(!v.videoWidth)return msg("om","Камера ҳоло омода нест.",1);
+ const c=$("cv");c.width=v.videoWidth;c.height=v.videoHeight;c.getContext("2d").drawImage(v,0,0);setPhoto(c.toDataURL("image/jpeg",.92));stop();msg("om","Акс гирифта шуд. Акнун «Хондани рақам»-ро пахш кунед.")};
+$("gal").onclick=$("pick").onclick=()=>$("file").click();
+$("file").onchange=e=>{const f=e.target.files?.[0];if(!f)return;
+ if(!f.type.startsWith("image/"))return msg("om","Файл бояд акс бошад.",1);
+ const u=URL.createObjectURL(f),im=new Image();
+ im.onload=()=>{const s=Math.min(1,1800/Math.max(im.width,im.height)),c=$("cv");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);setPhoto(c.toDataURL("image/jpeg",.9));URL.revokeObjectURL(u);msg("om","Акс интихоб шуд.")};
+ im.onerror=()=>{URL.revokeObjectURL(u);msg("om","Акс кушода нашуд.",1)};im.src=u;e.target.value="";
+};
+$("ocrB").onclick=async()=>{
+ if(!photo)return msg("om","Аввал акс гиред ё интихоб кунед.",1);
+ if(!window.Tesseract)return msg("om","OCR бор нашуд. Рақамро дар қисми 3 дастӣ нависед.",1);
+ const b=$("ocrB");b.disabled=true;msg("om","Рақам хонда мешавад...");
+ try{
+  const r=await Tesseract.recognize(photo,"eng",{logger:m=>{if(m.status==="recognizing text")msg("om","Хондан: "+Math.round((m.progress||0)*100)+"%")}});
+  const t=(r.data.text||"").replace(/[Oo]/g,"0").replace(/[Il|]/g,"1"),m=t.match(/\d{5,}/g)||[];
+  if(!m.length)return msg("om","Рақам ёфт нашуд. Дастӣ ворид кунед ё акси равшантар гиред.",1);
+  const v=m[0].slice(0,5);$("cur").value=v;$("rv").textContent=v+" ✔";$("rl").textContent="Рақам хонда шуд:";preview();
+  msg("om","Рақами пешниҳодшуда: "+v+". Онро бо дисплей муқоиса кунед.");
+ }catch(e){msg("om","OCR иҷро нашуд (интернетро санҷед). Рақамро дастӣ ворид кунед.",1)}
+ finally{b.disabled=false}
+};
+// receipt actions
+$("prt").onclick=()=>window.print();
+$("pdf").onclick=()=>{msg("cm","Дар равзанаи чоп «Save as PDF»-ро интихоб кунед.");window.print()};
+$("shr").onclick=async()=>{const r=cur();if(!r)return msg("cm","Аввал чек созед.",1);
+ const t=`Dono Energy\n${dt(r.date)}\nПешина ${r.prev}, нав ${r.cur}\nМасраф: ${r.cons} кВт·соат\nМаблағ: ${m2(r.amount)} сомонӣ`;
+ try{if(navigator.share)await navigator.share({title:"Dono Energy",text:t});else{await navigator.clipboard.writeText(t);msg("cm","Матни чек нусхабардорӣ шуд.")}}catch(e){}};
+$("more").onclick=()=>{all=!all;hist()};
+// payment mark
+const LINKS={};/* Баъди созишнома пур мешавад, мисол: LINKS["Alif"]="пайванди-бонк?acc={acc}&sum={sum}" */
+$("payB").onclick=async()=>{
+ const r=cur();if(!r||r.paid||!method)return;
+ const acc=r.account||"",sum=m2(r.amount),b=$("bk"),L=LINKS[method];
+ $("payB").disabled=true;$("ps").hidden=true;
+ try{await navigator.clipboard.writeText(acc)}catch(e){}
+ const fin=()=>{r.paid=true;r.method=method;r.paidAt=new Date().toISOString();if(r.account)d.bal[r.account]=balOf(r.account)-r.amount;save();b.hidden=true;hist();receipt(r);bi()};
+ b.hidden=false;
+ b.innerHTML="🏦 "+esc(method)+"<br><span style='font-weight:400'>Литсавой: <b>"+esc(acc||"—")+"</b> · Маблағ: <b>"+sum+" сомонӣ</b><br>Рақами литсавой ва маблағ ба бонк гузаронида мешавад...</span>";
+ if(L){
+  b.innerHTML+="<br><button id='done' style='margin-top:8px'>✅ Пардохтро анҷом додам</button>";
+  $("done").onclick=fin;
+  location.href=L.split("{acc}").join(encodeURIComponent(acc)).split("{sum}").join(sum);
+ }else{
+  b.innerHTML+="<br><span style='font-weight:400'>Намоиш: бонк ҳоло ба барнома пайваст нашудааст.</span>";
+  if(API_URL){fetch(API_URL+"/api/pay",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({acc,amount:r.amount,bank:method})}).then(x=>{if(!x.ok)throw 0;fin()}).catch(()=>{b.textContent="❌ Пардохт анҷом нашуд. Интернетро санҷед ва дубора кӯшиш кунед.";$("payB").disabled=false})}else setTimeout(fin,2200);
+ }
+};
+const PG=["asosi","tarix","chek","pardoxt"];
+function go(p){if(!PG.includes(p))p="asosi";document.querySelector("main").dataset.pg=p;document.querySelectorAll("main>section").forEach(s=>s.classList.toggle("show",s.dataset.p===p));document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+p));window.scrollTo(0,0)}
+function nav(p){try{location.hash=p}catch(e){}go(p)}
+window.addEventListener("hashchange",()=>go(location.hash.slice(1)));
+window.addEventListener("beforeunload",stop);
+const rec=a=>d.custom[a]||DB[a];
+const balOf=a=>a in d.bal?d.bal[a]:(rec(a)?rec(a).bal:0);
+function bi(){const a=$("account").value.trim(),e=$("bi");if(!a){e.hidden=true;return}const c=rec(a),b=balOf(a);
+ e.hidden=false;e.className="msg"+(b>0.004?" e":"");
+ e.textContent=(c?"Шабака: "+NETS[c.net]+" · ":"")+(b>0.004?"Қарздор: "+m2(b)+" сомонӣ":b<-0.004?"Ҳақдор: "+m2(-b)+" сомонӣ":"Қарз нест")}
+async function lookup(){
+ const a=$("account").value.trim();let c=rec(a);
+ if(API_URL){try{const r=await fetch(API_URL+"/api/account/"+encodeURIComponent(a));if(r.status===404){msg("pm","Чунин рақами литсавой ёфт нашуд.",1);return}if(!r.ok)throw 0;const j=await r.json();c={name:j.name,addr:j.addr,net:j.net,r:j.reading,bal:j.balance};d.custom[a]=c;delete d.bal[a]}catch(e){msg("pm","Бо сервер пайваст шуда натавонист. Интернетро санҷед.",1);return}}
+ if(!c){msg("pm","Чунин рақами литсавой ёфт нашуд. Рақамҳои озмоишӣ: 1001234, 2005678, 3009911.",1);return}
+ $("owner").value=c.name;$("address").value=c.addr;
+ const h=d.history.find(x=>x.account===a);d.last=h?h.cur:(five(c.r)?c.r:"");
+ $("prev").value=d.last;$("prev").disabled=!!h;
+ save();preview();bi();msg("pm","Маълумот ёфт шуд. Шабака: "+NETS[c.net]+".")}
+$("fnd").onclick=lookup;
+$("account").onkeydown=e=>{if(e.key==="Enter")lookup()};
+load();initUI();go(location.hash.slice(1));
+</script></body></html>
